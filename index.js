@@ -1,4 +1,13 @@
-axios.get('https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=2021-07-20')
+let dateWithSlashes = "01/25/2025"
+let arrayOfDate = dateWithSlashes.split("/")
+let reorderedDateArray = []
+reorderedDateArray.push(arrayOfDate[2])
+reorderedDateArray.push(arrayOfDate[0])
+reorderedDateArray.push(arrayOfDate[1])
+let dateWithDashes = reorderedDateArray.join("-")
+console.log(dateWithDashes)
+
+axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=2021-03-23`)
     .then(function (response) {
         console.log(response.data);
         let date = response.data["date"]
@@ -16,7 +25,6 @@ axios.get('https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=2021-07-20')
         earlyMincha = moment(plagHaMincha).subtract(15, "minutes").format('LT')
         candleLighting = moment(shkia).subtract(18, "minutes").format('LT')
         console.log("Date:", formatedDate, "Mincha Gedola:", formatedMinchaGedola, "Early Mincha:", earlyMincha, "Plag:", formatedPlagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", formatedShkia, "Tzeis 50 Min:", formatedTzeis50min)
-
     })
     .catch(function (error) {
         console.log(error);
