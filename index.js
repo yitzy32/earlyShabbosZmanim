@@ -1,31 +1,29 @@
 thisFridaySlashes = moment().endOf('week').subtract(1, 'day').format("L");
-console.log(thisFridaySlashes)
 let arrayOfDate = thisFridaySlashes.split("/")
 let reorderedDateArray = []
 reorderedDateArray.push(arrayOfDate[2])
 reorderedDateArray.push(arrayOfDate[0])
 reorderedDateArray.push(arrayOfDate[1])
 let thisFridayDashes = reorderedDateArray.join("-")
-console.log(thisFridayDashes)
 
 axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=${thisFridayDashes}`)
     .then(function (response) {
         console.log(response.data);
-        let date = response.data["date"]
+        let uglyDate = response.data["date"]
         let location = response.data["location"]["name"]
-        let minchaGedola = response.data["times"]["minchaGedola"]
-        let plagHaMincha = response.data["times"]["plagHaMincha"]
-        let shkia = response.data["times"]["sunset"]
-        let tzeis50min = response.data["times"]["tzeit50min"]
+        let uglyMinchaGedola = response.data["times"]["minchaGedola"]
+        let uglyPlagHaMincha = response.data["times"]["plagHaMincha"]
+        let uglyShkia = response.data["times"]["sunset"]
+        let uglyTzeis50min = response.data["times"]["tzeit50min"]
 
-        let formatedDate = moment(date, "YYYY MM DD").format("LL");
-        let formatedMinchaGedola = moment(minchaGedola, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let formatedPlagHaMincha = moment(plagHaMincha, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let formatedShkia = moment(shkia, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let formatedTzeis50min = moment(tzeis50min, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        earlyMincha = moment(plagHaMincha).subtract(15, "minutes").format('LT')
-        candleLighting = moment(shkia).subtract(18, "minutes").format('LT')
-        console.log("Date:", formatedDate, "Mincha Gedola:", formatedMinchaGedola, "Early Mincha:", earlyMincha, "Plag:", formatedPlagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", formatedShkia, "Tzeis 50 Min:", formatedTzeis50min)
+        let legibleDate = moment(uglyDate, "YYYY MM DD").format("LL");
+        let legibleMinchaGedola = moment(uglyMinchaGedola, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        let legiblePlagHaMincha = moment(uglyPlagHaMincha, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        let legibleShkia = moment(uglyShkia, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        let legibleTzeis50min = moment(uglyTzeis50min, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        let earlyMincha = moment(uglyPlagHaMincha).subtract(15, "minutes").format('LT')
+        let candleLighting = moment(uglyShkia).subtract(18, "minutes").format('LT')
+        console.log("Date:", legibleDate, "Mincha Gedola:", legibleMinchaGedola, "Early Mincha:", earlyMincha, "Plag:", legiblePlagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", legibleTzeis50min)
     })
     .catch(function (error) {
         console.log(error);
