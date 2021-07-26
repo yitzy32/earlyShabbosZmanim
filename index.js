@@ -1,13 +1,14 @@
-let dateWithSlashes = "01/25/2025"
-let arrayOfDate = dateWithSlashes.split("/")
+thisFridaySlashes = moment().endOf('week').subtract(1, 'day').format("L");
+console.log(thisFridaySlashes)
+let arrayOfDate = thisFridaySlashes.split("/")
 let reorderedDateArray = []
 reorderedDateArray.push(arrayOfDate[2])
 reorderedDateArray.push(arrayOfDate[0])
 reorderedDateArray.push(arrayOfDate[1])
-let dateWithDashes = reorderedDateArray.join("-")
-console.log(dateWithDashes)
+let thisFridayDashes = reorderedDateArray.join("-")
+console.log(thisFridayDashes)
 
-axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=2021-03-23`)
+axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=${thisFridayDashes}`)
     .then(function (response) {
         console.log(response.data);
         let date = response.data["date"]
