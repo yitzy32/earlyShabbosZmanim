@@ -13,21 +13,15 @@ for (let index = 0; index < 4; index++) {
     axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=${thisFridayDashes}`)
         .then(function (response) {
             console.log(response.data);
-            let uglyDate = response.data["date"]
-            let location = response.data["location"]["name"]
-            let uglyMinchaGedola = response.data["times"]["minchaGedola"]
-            let uglyPlagHaMincha = response.data["times"]["plagHaMincha"]
-            let uglyShkia = response.data["times"]["sunset"]
-            let uglyTzeis50min = response.data["times"]["tzeit50min"]
 
-            let legibleDate = moment(uglyDate, "YYYY MM DD").format("LL");
-            let legibleMinchaGedola = moment(uglyMinchaGedola, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-            let legiblePlagHaMincha = moment(uglyPlagHaMincha, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-            let legibleShkia = moment(uglyShkia, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-            let legibleTzeis50min = moment(uglyTzeis50min, "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-            let earlyMincha = moment(uglyPlagHaMincha).subtract(15, "minutes").format('LT')
-            let candleLighting = moment(uglyShkia).subtract(18, "minutes").format('LT')
-            console.log("Date:", legibleDate, "Mincha Gedola:", legibleMinchaGedola, "Early Mincha:", earlyMincha, "Plag:", legiblePlagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", legibleTzeis50min)
+            let date = moment(response.data["date"], "YYYY MM DD").format("LL");
+            let minchaGedola = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+            let plagHaMincha = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+            let legibleShkia = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+            let tzeis50min = moment(response.data["times"]["tzeit50min"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+            let earlyMincha = moment(response.data["times"]["plagHaMincha"]).subtract(15, "minutes").format('LT')
+            let candleLighting = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
+            console.log("Date:", date, "Mincha Gedola:", minchaGedola, "Early Mincha:", earlyMincha, "Plag:", plagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", tzeis50min)
         })
         .catch(function (error) {
             console.log(error);
