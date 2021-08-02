@@ -1,3 +1,8 @@
+function getInputValue() {
+    let inputVal = document.getElementById("zipcode").value;
+    console.log(inputVal);
+}
+
 let thisFridaySlashes = moment().endOf('week').subtract(1, 'day').format("L");
 let thisFridayDashes = ""
 
