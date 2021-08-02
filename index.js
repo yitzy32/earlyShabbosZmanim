@@ -27,8 +27,10 @@ function getInputValue() {
                 console.log("Location:", location, "Date:", date, "Mincha Gedola:", minchaGedola, "Early Mincha:", earlyMincha, "Plag:", plagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", tzeis50min)
             })
             .catch(function (error) {
-                console.log(error);
-            })
+                console.log(error.response.data.error);
+                console.log(error.response.status);
+                alert(error.response.data.error);
+            });
         thisFridayDashes = ""
         thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
     }
