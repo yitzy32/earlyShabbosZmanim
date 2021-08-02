@@ -18,7 +18,7 @@ for (let index = 0; index < 4; index++) {
     axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=11210&date=${thisFridayDashes}`)
         .then(function (response) {
             console.log(response.data);
-
+            let location = response.data.location.name
             let date = moment(response.data["date"], "YYYY MM DD").format("LL");
             let minchaGedola = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
             let plagHaMincha = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
@@ -26,7 +26,7 @@ for (let index = 0; index < 4; index++) {
             let tzeis50min = moment(response.data["times"]["tzeit50min"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
             let earlyMincha = moment(response.data["times"]["plagHaMincha"]).subtract(15, "minutes").format('LT')
             let candleLighting = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
-            console.log("Date:", date, "Mincha Gedola:", minchaGedola, "Early Mincha:", earlyMincha, "Plag:", plagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", tzeis50min)
+            console.log("Location:", location, "Date:", date, "Mincha Gedola:", minchaGedola, "Early Mincha:", earlyMincha, "Plag:", plagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", legibleShkia, "Tzeis 50 Min:", tzeis50min)
         })
         .catch(function (error) {
             console.log(error);
