@@ -1,9 +1,10 @@
-function getInputValue() {
+async function getInputValue() {
     let inputVal = document.getElementById("zipcode").value;
     console.log(inputVal);
     let thisFridaySlashes = moment().endOf('week').subtract(1, 'day').format("L");
     let thisFridayDashes = ""
 
+    let temporaryDays = []
     let temporaryDay = {}
     for (let index = 0; index < 4; index++) {
 
@@ -14,7 +15,7 @@ function getInputValue() {
         thisFridayDashes += "-"
         thisFridayDashes += splitDay[1]
 
-        axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${inputVal}&date=${thisFridayDashes}`)
+        await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${inputVal}&date=${thisFridayDashes}`)
             .then(function (response) {
                 console.log(response.data);
                 let location = response.data.location.name
@@ -36,6 +37,7 @@ function getInputValue() {
                 temporaryDay["earlyMincha"] = earlyMincha
                 temporaryDay["candleLighting"] = candleLighting
                 console.log(temporaryDay)
+                temporaryDays.push(temporaryDay)
             })
             .catch(function (error) {
                 console.log(error.response.data.error);
@@ -45,4 +47,5 @@ function getInputValue() {
         thisFridayDashes = ""
         thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
     }
+    console.log(temporaryDays)
 }
