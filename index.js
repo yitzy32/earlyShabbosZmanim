@@ -5,8 +5,8 @@ async function getInputValue() {
   let thisFridayDashes = ""
 
   let temporaryDays = []
-  let temporaryDay = {}
   for (let index = 0; index < 4; index++) {
+    let temporaryDay = {}
 
     splitDay = thisFridaySlashes.split("/")
     thisFridayDashes += splitDay[2]
@@ -17,25 +17,15 @@ async function getInputValue() {
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${inputVal}&date=${thisFridayDashes}`)
       .then(function (response) {
-        console.log(response.data);
-        let location = response.data.location.name
-        let date = moment(response.data["date"], "YYYY MM DD").format("LL");
-        let minchaGedola = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let plagHaMincha = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let shkia = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let tzeis50min = moment(response.data["times"]["tzeit50min"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        let earlyMincha = moment(response.data["times"]["plagHaMincha"]).subtract(15, "minutes").format('LT')
-        let candleLighting = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
-        console.log("Location:", location, "Date:", date, "Mincha Gedola:", minchaGedola, "Early Mincha:", earlyMincha, "Plag:", plagHaMincha, "Candle Lighting:", candleLighting, "Shkia:", shkia, "Tzeis 50 Min:", tzeis50min)
 
-        temporaryDay["location"] = location
-        temporaryDay["date"] = date
-        temporaryDay["minchaGedola"] = minchaGedola
-        temporaryDay["plagHaMincha"] = plagHaMincha
-        temporaryDay["shkia"] = shkia
-        temporaryDay["tzeis50min"] = tzeis50min
-        temporaryDay["earlyMincha"] = earlyMincha
-        temporaryDay["candleLighting"] = candleLighting
+        temporaryDay["location"] = response.data.location.name
+        temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("LL");
+        temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        temporaryDay["plagHaMincha"] = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        temporaryDay["shkia"] = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        temporaryDay["tzeis50min"] = moment(response.data["times"]["tzeit50min"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
+        temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(15, "minutes").format('LT')
+        temporaryDay["candleLighting"] = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
         console.log(temporaryDay)
         temporaryDays.push(temporaryDay)
       })
