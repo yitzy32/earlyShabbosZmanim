@@ -1,0 +1,27 @@
+body {
+  font-family: arial, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #cccccc;
+  padding: 10px;
+}
+
+th {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+h2 {
+  text-align: center;
+}
