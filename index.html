@@ -13,16 +13,15 @@
 </head>
 
 <body>
-  <p>
-    <label for="zipcode">Please Enter Zipcode</label>
-  </p>
-  <p>
-    <input type="text" placeholder="Type " name="zipcode" id="zipcode">
-  </p>
-  <p>
-    <button type="button" onclick="getInputValue();">Search</button>
-  </p>
+
+  <div>
+    <p><label for="zipcode">Search Zmanim For Any US Zipcode</label></p>
+    <input type="text" id="zipcode" name="zipcode" placeholder="ex 11229">
+    <input name="submit" class="cat_button" src="images/search-svgrepo-com.svg" type="image" onclick="getInputValue();">
+  </div>
+
   <h2 id="locationH2"></h2>
+
   <table>
     <thead id="tableHead"></thead>
     <tbody id="tableData"></tbody>
