@@ -9,6 +9,28 @@
   <script src="https://momentjs.com/downloads/moment.js"></script>
   <script src="index.js" defer></script>
   <title>Document</title>
+  <style>
+    body {
+      font-family: arial, sans-serif;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100;
+    }
+
+    td,
+    tr {
+      border: 1px solid #cccccc;
+      padding: 10px;
+    }
+
+    th {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,6 +43,22 @@
   <p>
     <button type="button" onclick="getInputValue();">Search</button>
   </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Mincha Gedola</th>
+        <th>Early Mincha</th>
+        <th>Plag</th>
+        <th>Candle Lighting</th>
+        <th>Shkia</th>
+        <th>Tzeis 50 Minutes</th>
+      </tr>
+    </thead>
+    <tbody id="tableData"></tbody>
+  </table>
+
 </body>
 
 </html>
