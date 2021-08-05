@@ -39,14 +39,19 @@ async function getInputValue() {
   }
   console.log(temporaryDays)
 
+  const locationH2 = document.getElementById('locationH2')
   const tableHeadData = document.getElementById('tableHead');
   const tableBody = document.getElementById('tableData')
 
+  let location = '';
   let tbodyHmtl = '';
 
   for (const day of temporaryDays) {
     tbodyHmtl += `<tr>\n<td>${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td>${day.candleLighting}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis50min}</td>\n</tr>`
+    location = day.location
   }
+
+  locationH2.innerHTML = location;
 
   tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
 

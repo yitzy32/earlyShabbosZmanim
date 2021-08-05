@@ -15,9 +15,8 @@
     }
 
     table {
-      font-family: arial, sans-serif;
       border-collapse: collapse;
-      width: 100;
+      width: 100%;
     }
 
     td,
@@ -29,6 +28,10 @@
     th {
       font-weight: bold;
       text-transform: capitalize;
+    }
+
+    h2 {
+      text-align: center;
     }
   </style>
 </head>
@@ -43,7 +46,7 @@
   <p>
     <button type="button" onclick="getInputValue();">Search</button>
   </p>
-
+  <h2 id="locationH2"></h2>
   <table>
     <thead id="tableHead"></thead>
     <tbody id="tableData"></tbody>
