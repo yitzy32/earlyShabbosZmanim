@@ -47,13 +47,13 @@ async function getInputValue() {
   let tbodyHmtl = '';
 
   for (const day of temporaryDays) {
-    tbodyHmtl += `<tr>\n<td>Friday, ${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td>${day.candleLighting}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis50min}</td>\n</tr>`
+    tbodyHmtl += `<tr>\n<td id="date-column">${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td>${day.candleLighting}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis50min}</td>\n</tr>`
     location = day.location
   }
 
   locationH2.innerHTML = "Zmanim for: " + location;
 
-  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
+  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early <br>Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
 
   tableBody.innerHTML = tbodyHmtl
 }
