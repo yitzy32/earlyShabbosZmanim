@@ -1,7 +1,16 @@
 async function getInputValue() {
   let inputVal = document.getElementById("zipcode").value;
   console.log(inputVal);
-  let thisFridaySlashes = moment().endOf('week').subtract(1, 'day').format("L");
+
+  // Finds First Monday of Daylight Savings Time of current year
+  for (let i = 6; i < 16; i++) {
+    if (moment(`March ${i}`, "MMMM D").isDST()) {
+      firstMondayOfDst = (moment(`March ${i}`, "MMMM D"))
+      break;
+    }
+  }
+
+  let thisFridaySlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
   let thisFridayDashes = ""
 
   let temporaryDays = []
