@@ -17,12 +17,15 @@ async function getInputValue() {
   for (let index = 0; index < 4; index++) {
     let temporaryDay = {}
 
-    splitDay = thisFridaySlashes.split("/")
-    thisFridayDashes += splitDay[2]
+    dayArray = thisFridaySlashes.split("/")
+    let month = dayArray[0]
+    let day = dayArray[1]
+    let year = dayArray[2]
+    thisFridayDashes += year
     thisFridayDashes += "-"
-    thisFridayDashes += splitDay[0]
+    thisFridayDashes += month
     thisFridayDashes += "-"
-    thisFridayDashes += splitDay[1]
+    thisFridayDashes += day
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${inputVal}&date=${thisFridayDashes}`)
       .then(function (response) {
