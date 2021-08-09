@@ -47,6 +47,9 @@ async function getInputValue() {
         alert(error.response.data.error);
       });
     thisFridayDashes = ""
+
+    // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
+    thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
     thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
   }
   console.log(temporaryDays)
