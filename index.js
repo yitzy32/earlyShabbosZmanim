@@ -72,6 +72,8 @@ async function getInputValue() {
   tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early <br>Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
 
   tableBody.innerHTML = tbodyHmtl
+
+  document.getElementById('btn').style.visibility = "visible";
 }
 
 function PrintDoc() {
