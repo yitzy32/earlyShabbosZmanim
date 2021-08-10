@@ -45,6 +45,7 @@ async function getInputValue() {
         console.log(error.response.data.error);
         console.log(error.response.status);
         alert(error.response.data.error);
+        window.location.reload();
       });
     thisFridayDashes = ""
 
