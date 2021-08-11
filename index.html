@@ -1,35 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://momentjs.com/downloads/moment.js"></script>
-  <link rel="stylesheet" href="my-css.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <!-- <link rel="stylesheet" href="my-css.css"> -->
   <script src="index.js" defer></script>
-  <title>Document</title>
+  <title>Early Shabbos Zmanim</title>
 </head>
 
-<body>
+<body class="landing is-preload">
+  <div id="page-wrapper">
 
-  <div>
-    <p><label for="zipcode">Search Zmanim For Any US Zipcode</label></p>
-    <input type="text" id="zipcode" name="zipcode" placeholder="ex 11229">
-    <input name="submit" class="cat_button" src="images/search-svgrepo-com.svg" type="image" onclick="getInputValue();">
+    <!-- Header -->
+    <!-- <header id="header" class="alt">
+					<h1><a href="index.html">Alpha</a> by HTML5 UP</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#" class="icon solid fa-angle-down">Layouts</a>
+								<ul>
+									<li><a href="generic.html">Generic</a></li>
+									<li><a href="contact.html">Contact</a></li>
+									<li><a href="elements.html">Elements</a></li>
+									<li>
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Option One</a></li>
+											<li><a href="#">Option Two</a></li>
+											<li><a href="#">Option Three</a></li>
+											<li><a href="#">Option Four</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#" class="button">Sign Up</a></li>
+						</ul>
+					</nav>
+				</header> -->
+
+    <!-- Banner -->
+    <section id="banner">
+      <h2>Early Shabbos Zmanim</h2>
+      <p>Get Important Zmanim for your Hektik Friday afternoons</p>
+      <ul class="actions special">
+        <li><a href="#" class="button">Jump to Search</a></li>
+      </ul>
+    </section>
+
+    <!-- Main -->
+    <section id="main" class="container">
+
+      <section class="box special">
+        <header class="major">
+          <h2>Introducing the Ultimate Erev Shabbos Zmanim Calendar
+          </h2>
+          <p>We all know what friday afternoons look like.<br />
+            This app wont help get your kids in the bath but at least it will you will have all your important
+            zmanim.<br />
+            No matter how long the days are in the summer, Erev Shabbos is always busy. For those who try to be makpid
+            on davening mincha before Plag continue this thought...</p>
+        </header>
+      </section>
+
+    </section>
+
+    <section class="container">
+      <section class="box special">
+        <div class="row gtr-uniform gtr-50">
+          <div class="col-9 col-12-mobilep">
+            <!-- <p><label for="zipcode">Search Zmanim For Any US Zipcode</label></p> -->
+            <input type="text" id="zipcode" name="zipcode" placeholder="Search Any Zipcode ex 11229">
+          </div>
+          <div class="col-3 col-12-mobilep">
+            <input name="submit" class="fit" type="submit" value="Search" onclick="getInputValue();">
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Table -->
+    <section class="container">
+      <section class="box special">
+        <div id="page-to-print" class="table-wrapper">
+          <h2 id="locationH2"></h2>
+
+          <table class="alt">
+            <thead id="tableHead"></thead>
+            <tbody id="tableData"></tbody>
+          </table>
+        </div>
+        <input type='button' value='Print in Black and White' id='btn' onclick='PrintDoc()' />
+      </section>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+
+      <h2>Sign up for beta access</h2>
+      <p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+
+      <form>
+        <div class="row gtr-50 gtr-uniform">
+          <div class="col-8 col-12-mobilep">
+            <input type="email" name="email" id="email" placeholder="Email Address" />
+          </div>
+          <div class="col-4 col-12-mobilep">
+            <input type="submit" value="Sign Up" class="fit" />
+          </div>
+        </div>
+      </form>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <ul class="icons">
+        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+        <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+        <li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+      </ul>
+      <ul class="copyright">
+        <li>&copy; Untitled. All rights reserved.</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </footer>
+
   </div>
 
-  <div id="page-to-print">
-    <h2 id="locationH2"></h2>
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.dropotron.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
 
-    <table>
-      <thead id="tableHead"></thead>
-      <tbody id="tableData"></tbody>
-    </table>
-  </div>
-
-  <input type='button' value='Print' id='btn' onclick='PrintDoc()' />
 </body>
 
 </html>
