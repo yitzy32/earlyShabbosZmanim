@@ -1,43 +1,43 @@
-body {
+/* body {
   font-family: arial, sans-serif;
-}
+} */
 
-table {
+/* table {
   border-collapse: collapse;
   display:table;
   table-layout:fixed;
   width: 8in;
   margin-left: auto;
 	margin-right: auto;
-}
+} */
 
-td,
+/* td,
 th {
   border: 1px solid #cccccc;
   padding-top: 8px;
   padding-bottom: 8px;
   text-align: center;
   display: table-cell;
-}
+} */
 
-th {
+/* th {
   font-weight: bold;
   text-transform: capitalize;
-}
+} */
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: #dddddd;
-}
+} */
 
-table tr th:nth-child(1){
+/* table tr th:nth-child(1){
   width: 20%;
-}
+} */
 
-h2 {
+/* h2 {
   text-align: center;
-}
+} */
 
-input[type=text], select {
+/* input[type=text], select {
   width: 35%;
   padding: 20px 20px;
   margin: 8px 0;
@@ -47,26 +47,33 @@ input[type=text], select {
   outline: none;
   transition: width 0.4s ease-in-out;
   transition: border-bottom 0.5s;
-}
+} */
 
-input[type=text]:focus {
+/* input[type=text]:focus {
   border-bottom: 2px solid #0004ff;
-}
+} */
 
-input[type=image] {
+/* input[type=image] {
   width: 50px;
   margin-left: 30px;
   margin-bottom: -25px;
-}
+} */
 
-input:focus::placeholder {
+/* input:focus::placeholder {
   color: transparent;
-}
+} */
 
-div {
+/* div {
   padding: 40px;
+} */
+
+#table-container {
+  visibility: hidden;
 }
 
-#btn {
-  visibility: hidden;
+section section div h2 {
+  margin: 3em;
+}
+#inner-table-placeholder {
+  margin-top: 8em;
 }
