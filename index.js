@@ -14,7 +14,7 @@ async function getInputValue() {
   let thisFridayDashes = ""
 
   let temporaryDays = []
-  for (let index = 0; index < 50; index++) {
+  for (let index = 0; index < 4; index++) {
     let temporaryDay = {}
 
     dayArray = thisFridaySlashes.split("/")
@@ -69,7 +69,7 @@ async function getInputValue() {
 
   locationH2.innerHTML = "Zmanim for: " + location;
 
-  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early <br>Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
+  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
 
   tableBody.innerHTML = tbodyHmtl
 
