@@ -2,14 +2,14 @@
   font-family: arial, sans-serif;
 } */
 
-/* table {
+table {
   border-collapse: collapse;
   display:table;
   table-layout:fixed;
-  width: 8in;
+  /* width: 8.25in; */
   margin-left: auto;
 	margin-right: auto;
-} */
+}
 
 /* td,
 th {
@@ -29,13 +29,13 @@ th {
   background-color: #dddddd;
 } */
 
-/* table tr th:nth-child(1){
-  width: 20%;
-} */
+table tr th:nth-child(1){
+  width: 24%;
+}
 
-/* h2 {
+h2 {
   text-align: center;
-} */
+}
 
 /* input[type=text], select {
   width: 35%;

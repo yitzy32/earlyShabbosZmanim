@@ -2673,7 +2673,7 @@
 
 	table {
 		margin: 0 0 2em 0;
-		width: 100%;
+		width: 8.25in;
 	}
 
 		table tbody tr {
@@ -2687,7 +2687,8 @@
 			}
 
 		table td {
-			padding: 0.75em 0.75em;
+			padding: 3px 5px;
+      text-align: center;
 		}
 
 		table th {
@@ -2695,7 +2696,7 @@
 			font-size: 0.9em;
 			font-weight: 300;
 			padding: 0 0.75em 0.75em 0.75em;
-			text-align: left;
+			text-align: center;
 		}
 
 		table thead {
