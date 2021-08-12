@@ -74,7 +74,7 @@ async function getInputValue() {
   tableBody.innerHTML = tbodyHmtl
 
   document.getElementById('table-placeholder').style.display = "none";
-  document.getElementById('user-input').style.visibility = "visible";
+  document.getElementById('table-container').style.visibility = "visible";
 }
 
 function PrintDoc() {
