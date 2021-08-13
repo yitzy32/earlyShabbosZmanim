@@ -2,6 +2,10 @@
   font-family: arial, sans-serif;
 } */
 
+body{
+  -webkit-print-color-adjust: exact;
+}
+
 table {
   border-collapse: collapse;
   display:table;
