@@ -86,3 +86,13 @@ function PrintDoc() {
   popupWin.document.write('</html>');
   popupWin.document.close();
 }
+
+// Allow pressing Enter key to search in addition to clicking search
+
+let inputVal = document.getElementById("zipcode");
+inputVal.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("search").click();
+  }
+});
