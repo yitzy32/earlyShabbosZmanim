@@ -58,6 +58,7 @@ async function getInputValue() {
   const locationH2 = document.getElementById('locationH2')
   const tableHeadData = document.getElementById('tableHead');
   const tableBody = document.getElementById('tableData')
+  const disclaimer = document.getElementById('disclaimer')
 
   let location = '';
   let tbodyHmtl = '';
@@ -72,6 +73,8 @@ async function getInputValue() {
   tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th>Candle Lighting</th><th>Shkia</th><th>Tzeis 50 Minutes</th></tr>";
 
   tableBody.innerHTML = tbodyHmtl
+
+  disclaimer.innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + inputVal + " target='_blank'>MyZmanim</a>"
 
   document.getElementById('table-placeholder').style.display = "none";
   document.getElementById('table-container').style.visibility = "visible";
