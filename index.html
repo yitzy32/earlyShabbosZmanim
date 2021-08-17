@@ -139,16 +139,23 @@
     <!-- CTA -->
     <section id="cta">
 
-      <h2>Sign up for beta access</h2>
-      <p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+      <h2>Get in touch.</h2>
+      <p>Experiencing any issues? Have any suggestion? Just want to shmooze? <br>Messages sent with this form bellow
+        will
+        send me a direct email and I will get back to you as soon as I can.</p>
 
-      <form>
+      <form action="https://formspree.io/f/xknkprew" method="POST">
         <div class="row gtr-50 gtr-uniform">
-          <div class="col-8 col-12-mobilep">
-            <input type="email" name="email" id="email" placeholder="Email Address" />
-          </div>
-          <div class="col-4 col-12-mobilep">
-            <input type="submit" value="Sign Up" class="fit" />
+          <div class="col-12 col-12-mobilep">
+            <label>
+              <input type="email" name="_replyto" id="email" placeholder="Email Address">
+            </label>
+            <label>
+              <textarea name="message" placeholder="Your Message"></textarea>
+            </label>
+            <input type="submit" class="fit" value="Send">
+            <!-- </div>
+          <div class="col-4 col-12-mobilep"> -->
           </div>
         </div>
       </form>
