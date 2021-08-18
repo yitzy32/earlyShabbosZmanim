@@ -1,4 +1,5 @@
 async function getInputValue() {
+  let howManyWeeks = document.getElementById("how-many-weeks").value;
   let inputVal = document.getElementById("zipcode").value;
   console.log(inputVal);
 
@@ -14,7 +15,7 @@ async function getInputValue() {
   let thisFridayDashes = ""
 
   let temporaryDays = []
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < howManyWeeks; index++) {
     let temporaryDay = {}
 
     dayArray = thisFridaySlashes.split("/")
