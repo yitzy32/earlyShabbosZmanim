@@ -1,8 +1,8 @@
 async function getInputValue() {
   let howManyWeeks = document.getElementById("how-many-weeks").value;
+  howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let inputVal = document.getElementById("zipcode").value;
   console.log(inputVal);
-
   // Finds First Monday of Daylight Savings Time of current year
   for (let i = 6; i < 16; i++) {
     if (moment(`March ${i}`, "MMMM D").isDST()) {
@@ -15,7 +15,7 @@ async function getInputValue() {
   let thisFridayDashes = ""
 
   let temporaryDays = []
-  for (let index = 0; index < howManyWeeks; index++) {
+  for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
     dayArray = thisFridaySlashes.split("/")
@@ -34,7 +34,7 @@ async function getInputValue() {
         temporaryDay["location"] = response.data.location.name
         temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("LL");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(15, "minutes").format('LT')
+        temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
         temporaryDay["plagHaMincha"] = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         temporaryDay["candleLighting"] = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
         temporaryDay["shkia"] = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
