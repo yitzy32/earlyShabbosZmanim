@@ -98,9 +98,6 @@
     <section class="container" id="search-container">
       <section class="box special">
         <div class="row gtr-uniform gtr-50">
-          What date would you like to start from? <span id="first-dst-day"></span> is the first week of Daylight Saving
-          Time
-          <input type="date" id="users-date">
           How Many weeks would you like to get?
           <input type="text" id="how-many-weeks">
           How many minutes before Plag?
@@ -116,7 +113,7 @@
             <input type="text" id="zipcode" name="zipcode" placeholder="Search Any Zipcode ex 11229">
           </div>
           <div class="col-3 col-12-mobilep">
-            <input name="submit" class="fit" type="submit" value="Search" onclick="getInputValue();" id="search">
+            <input name="submit" class="fit" type="submit" value="Search" onclick="generateCalendar();" id="search">
           </div>
         </div>
       </section>
@@ -151,8 +148,7 @@
     <section id="cta">
 
       <h2>Get in touch.</h2>
-      <p>Experiencing any issues? Have any suggestion? Just want to shmooze? <br>Messages sent with this form bellow
-        will
+      <p>Experiencing any issues? Have any suggestion? Just want to shmooze? <br>Messages sent with this form below will
         send me a direct email and I will get back to you as soon as I can.</p>
 
       <form action="https://formspree.io/f/xknkprew" method="POST">

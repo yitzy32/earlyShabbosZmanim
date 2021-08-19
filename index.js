@@ -1,10 +1,8 @@
-async function getInputValue() {
+async function generateCalendar() {
 
   let howManyWeeks = document.getElementById("how-many-weeks").value;
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
-  let inputVal = document.getElementById("zipcode").value;
-  let usersDate = document.getElementById("users-date").value;
-  console.log(usersDate)
+  let zipcode = document.getElementById("zipcode").value;
 
   // Finds First Monday of Daylight Savings Time of current year
   for (let i = 6; i < 16; i++) {
@@ -14,24 +12,24 @@ async function getInputValue() {
     }
   }
 
-  let thisFridaySlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
-  let thisFridayDashes = ""
+  let firstFridayDstSlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
+  let firstFridayDstDashes = ""
 
   let temporaryDays = []
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
-    dayArray = thisFridaySlashes.split("/")
+    dayArray = firstFridayDstSlashes.split("/")
     let month = dayArray[0]
     let day = dayArray[1]
     let year = dayArray[2]
-    thisFridayDashes += year
-    thisFridayDashes += "-"
-    thisFridayDashes += month
-    thisFridayDashes += "-"
-    thisFridayDashes += day
+    firstFridayDstDashes += year
+    firstFridayDstDashes += "-"
+    firstFridayDstDashes += month
+    firstFridayDstDashes += "-"
+    firstFridayDstDashes += day
 
-    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${inputVal}&date=${thisFridayDashes}`)
+    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${firstFridayDstDashes}`)
       .then(function (response) {
 
         temporaryDay["location"] = response.data.location.name
@@ -51,11 +49,11 @@ async function getInputValue() {
         alert(error.response.data.error);
         window.location.reload();
       });
-    thisFridayDashes = ""
+    firstFridayDstDashes = ""
 
     // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
-    thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
-    thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
+    firstFridayDstSlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
+    firstFridayDstSlashes = moment(firstFridayDstSlashes).add(7, "day").format("L")
   }
   console.log(temporaryDays)
 
@@ -78,7 +76,7 @@ async function getInputValue() {
 
   tableBody.innerHTML = tbodyHmtl
 
-  disclaimer.innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + inputVal + " target='_blank'>MyZmanim</a>"
+  disclaimer.innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
 
   document.getElementById('table-placeholder').style.display = "none";
   document.getElementById('table-container').style.visibility = "visible";
@@ -96,8 +94,8 @@ function PrintDoc() {
 
 // Allow pressing Enter key to search in addition to clicking search
 
-let inputVal = document.getElementById("zipcode");
-inputVal.addEventListener("keyup", function (event) {
+let zipcode = document.getElementById("zipcode");
+zipcode.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
     document.getElementById("search").click();
