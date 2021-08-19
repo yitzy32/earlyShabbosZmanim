@@ -1,8 +1,11 @@
 async function getInputValue() {
+
   let howManyWeeks = document.getElementById("how-many-weeks").value;
-  howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
+  let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let inputVal = document.getElementById("zipcode").value;
-  console.log(inputVal);
+  let usersDate = document.getElementById("users-date").value;
+  console.log(usersDate)
+
   // Finds First Monday of Daylight Savings Time of current year
   for (let i = 6; i < 16; i++) {
     if (moment(`March ${i}`, "MMMM D").isDST()) {
