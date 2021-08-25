@@ -101,3 +101,20 @@ zipcode.addEventListener("keyup", function (event) {
     document.getElementById("search").click();
   }
 });
+
+// Allows user to enter start date. js adds slashes
+
+function usersDate(event) {
+  if (event.keyCode == 8 || event.keyCode == 46) {
+    return
+  }
+  let dateInput = document.getElementById('users-date')
+  if (dateInput.value.length === 2) {
+    let addFirstSlash = dateInput.value += "/"
+    dateInput.toString().replace(dateInput.value, addFirstSlash);
+  }
+  if (dateInput.value.length === 5) {
+    let addSecondSlash = dateInput.value += "/"
+    dateInput.toString().replace(dateInput.value, addSecondSlash);
+  }
+}
