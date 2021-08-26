@@ -1,5 +1,6 @@
 async function generateCalendar() {
 
+  let usersDate = moment(document.getElementById('users-date').value)
   let howManyWeeks = document.getElementById("how-many-weeks").value;
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let zipcode = document.getElementById("zipcode").value;
@@ -12,24 +13,38 @@ async function generateCalendar() {
     }
   }
 
-  let firstFridayDstSlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
-  let firstFridayDstDashes = ""
+  let thisFridayDashes = "";
+  let thisFridaySlashes = usersDate.endOf('week').subtract(1, 'day').format("L");
+  console.log(thisFridaySlashes)
+  let arrayOfDay = thisFridaySlashes.split("/")
+  let month = arrayOfDay[0]
+  let day = arrayOfDay[1]
+  let year = arrayOfDay[2]
+  thisFridayDashes += year
+  thisFridayDashes += "-"
+  thisFridayDashes += month
+  thisFridayDashes += "-"
+  thisFridayDashes += day
+  console.log("thisFridayDashes:", thisFridayDashes)
+
+  // let firstFridayDstSlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
+  // let firstFridayDstDashes = ""
 
   let temporaryDays = []
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
-    dayArray = firstFridayDstSlashes.split("/")
-    let month = dayArray[0]
-    let day = dayArray[1]
-    let year = dayArray[2]
-    firstFridayDstDashes += year
-    firstFridayDstDashes += "-"
-    firstFridayDstDashes += month
-    firstFridayDstDashes += "-"
-    firstFridayDstDashes += day
+    // dayArray = firstFridayDstSlashes.split("/")
+    // let month = dayArray[0]
+    // let day = dayArray[1]
+    // let year = dayArray[2]
+    // firstFridayDstDashes += year
+    // firstFridayDstDashes += "-"
+    // firstFridayDstDashes += month
+    // firstFridayDstDashes += "-"
+    // firstFridayDstDashes += day
 
-    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${firstFridayDstDashes}`)
+    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${thisFridayDashes}`)
       .then(function (response) {
 
         temporaryDay["location"] = response.data.location.name
@@ -49,11 +64,14 @@ async function generateCalendar() {
         alert(error.response.data.error);
         window.location.reload();
       });
-    firstFridayDstDashes = ""
+    thisFridayDashes = ""
+    // firstFridayDstDashes = ""
 
     // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
-    firstFridayDstSlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
-    firstFridayDstSlashes = moment(firstFridayDstSlashes).add(7, "day").format("L")
+    thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
+    thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
+    // firstFridayDstSlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
+    // firstFridayDstSlashes = moment(firstFridayDstSlashes).add(7, "day").format("L")
   }
   console.log(temporaryDays)
 
