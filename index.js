@@ -5,14 +5,6 @@ async function generateCalendar() {
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let zipcode = document.getElementById("zipcode").value;
 
-  // Finds First Monday of Daylight Savings Time of current year
-  for (let i = 6; i < 16; i++) {
-    if (moment(`March ${i}`, "MMMM D").isDST()) {
-      firstMondayOfDst = (moment(`March ${i}`, "MMMM D"))
-      break;
-    }
-  }
-
   let thisFridayDashes = "";
   let thisFridaySlashes = usersDate.endOf('week').subtract(1, 'day').format("L");
   console.log(thisFridaySlashes)
@@ -121,3 +113,19 @@ function usersDate(event) {
     dateInput.toString().replace(dateInput.value, addSecondSlash);
   }
 }
+
+// Function to find first Friday of DST
+function findFirstDSTFriday() {
+  for (let i = 6; i < 16; i++) {
+    if (moment(`March ${i}`, "MMMM D").isDST()) {
+      firstMondayOfDst = (moment(`March ${i}`, "MMMM D"))
+      break;
+    }
+  }
+  let firstFriOfDst = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
+  firstDstDay = document.getElementById('first-dst-day')
+  firstDstDay.innerHTML = `(first week of DST is ${firstFriOfDst})`
+}
+document.addEventListener("DOMContentLoaded", function () {
+  findFirstDSTFriday();
+});
