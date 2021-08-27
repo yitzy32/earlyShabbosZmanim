@@ -17,9 +17,6 @@ async function generateCalendar() {
   let thisFridaySlashes = usersDate.endOf('week').subtract(1, 'day').format("L");
   console.log(thisFridaySlashes)
 
-  // let firstFridayDstSlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
-  // let firstFridayDstDashes = ""
-
   let temporaryDays = []
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
@@ -34,15 +31,6 @@ async function generateCalendar() {
     thisFridayDashes += "-"
     thisFridayDashes += day
     console.log("thisFridayDashes:", thisFridayDashes)
-    // dayArray = firstFridayDstSlashes.split("/")
-    // let month = dayArray[0]
-    // let day = dayArray[1]
-    // let year = dayArray[2]
-    // firstFridayDstDashes += year
-    // firstFridayDstDashes += "-"
-    // firstFridayDstDashes += month
-    // firstFridayDstDashes += "-"
-    // firstFridayDstDashes += day
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${thisFridayDashes}`)
       .then(function (response) {
@@ -65,13 +53,10 @@ async function generateCalendar() {
         window.location.reload();
       });
     thisFridayDashes = ""
-    // firstFridayDstDashes = ""
 
     // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
     thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
     thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
-    // firstFridayDstSlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
-    // firstFridayDstSlashes = moment(firstFridayDstSlashes).add(7, "day").format("L")
   }
   console.log(temporaryDays)
 
