@@ -16,16 +16,6 @@ async function generateCalendar() {
   let thisFridayDashes = "";
   let thisFridaySlashes = usersDate.endOf('week').subtract(1, 'day').format("L");
   console.log(thisFridaySlashes)
-  let arrayOfDay = thisFridaySlashes.split("/")
-  let month = arrayOfDay[0]
-  let day = arrayOfDay[1]
-  let year = arrayOfDay[2]
-  thisFridayDashes += year
-  thisFridayDashes += "-"
-  thisFridayDashes += month
-  thisFridayDashes += "-"
-  thisFridayDashes += day
-  console.log("thisFridayDashes:", thisFridayDashes)
 
   // let firstFridayDstSlashes = firstMondayOfDst.endOf('week').subtract(1, 'day').format("L");
   // let firstFridayDstDashes = ""
@@ -34,6 +24,16 @@ async function generateCalendar() {
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
+    let arrayOfDay = thisFridaySlashes.split("/")
+    let month = arrayOfDay[0]
+    let day = arrayOfDay[1]
+    let year = arrayOfDay[2]
+    thisFridayDashes += year
+    thisFridayDashes += "-"
+    thisFridayDashes += month
+    thisFridayDashes += "-"
+    thisFridayDashes += day
+    console.log("thisFridayDashes:", thisFridayDashes)
     // dayArray = firstFridayDstSlashes.split("/")
     // let month = dayArray[0]
     // let day = dayArray[1]
