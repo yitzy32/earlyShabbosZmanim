@@ -39,9 +39,13 @@ async function generateCalendar() {
         temporaryDays.push(temporaryDay)
       })
       .catch(function (error) {
+        if (error.response.data.error === `Sorry, can't find ZIP code: ${zipcode}`) {
+          alert(`Sorry, Can't Find Location: ${zipcode}`)
+        } else if (error.response.data.error === "Date must match format YYYY-MM-DD: undefined-Invalid date-undefined") {
+          alert(`Invalid Date`)
+        }
         console.log(error.response.data.error);
         console.log(error.response.status);
-        alert(error.response.data.error);
         window.location.reload();
       });
     thisFridayDashes = ""
