@@ -1,5 +1,7 @@
 async function generateCalendar() {
 
+  if (!weeksValidator()) return
+
   let usersDate = moment(document.getElementById('users-date').value)
   let howManyWeeks = document.getElementById("how-many-weeks").value;
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
@@ -133,3 +135,13 @@ function findFirstDSTFriday() {
 document.addEventListener("DOMContentLoaded", function () {
   findFirstDSTFriday();
 });
+
+function weeksValidator() {
+  let weeks = document.getElementById('how-many-weeks').value
+  if (parseInt(weeks) > 0 && parseInt(weeks) < 35) {
+    return true
+  } else {
+    alert("Max weeks is 34")
+    return false
+  }
+}
