@@ -121,9 +121,11 @@ function usersDate(event) {
   } else if (dateInput.value.length === 5) {
     let addSecondSlash = dateInput.value += "/"
     dateInput.toString().replace(dateInput.value, addSecondSlash);
-  } else if (dateInput.value.length === 10 && months.includes(month) && days.includes(day)) {
-    console.log("good length")
-
+  } else if (dateInput.value.length === 10 && months.includes(month) && days.includes(day) && dateInputVal[2] === "/" && dateInputVal[5] === "/") {
+    // This doesn't actually allow or stop anything yet
+    return true
+  } else {
+    return false
   }
 }
 
