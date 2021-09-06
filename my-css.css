@@ -2,6 +2,10 @@
   font-family: arial, sans-serif;
 } */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   -webkit-print-color-adjust: exact;
 }

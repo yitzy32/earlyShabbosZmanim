@@ -81,6 +81,8 @@ async function generateCalendar() {
 
   document.getElementById('table-placeholder').style.display = "none";
   document.getElementById('table-container').style.visibility = "visible";
+
+  document.getElementById('table-container').scrollIntoView();
 }
 
 function PrintDoc() {
