@@ -4,6 +4,7 @@ async function generateCalendar() {
 
   let usersDate = moment(document.getElementById('users-date').value)
   let howManyWeeks = document.getElementById("how-many-weeks").value;
+  let minchaBizmanMinutes = document.getElementById("mincha-bizman-minutes").value;
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let zipcode = document.getElementById("zipcode").value;
 
@@ -35,7 +36,7 @@ async function generateCalendar() {
         temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
         temporaryDay["plagHaMincha"] = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         temporaryDay["candleLighting"] = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
-        temporaryDay["minchaBizman"] = moment(temporaryDay["candleLighting"], "HH:mm A").add(10, "minutes").format('LT')
+        temporaryDay["minchaBizman"] = moment(temporaryDay["candleLighting"], "HH:mm A").add(minchaBizmanMinutes, "minutes").format('LT')
         console.log(temporaryDay['minchaBizman'])
         temporaryDay["shkia"] = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         temporaryDay["tzeis40min"] = moment(response.data["times"]["sunset"]).add(40, "minutes").format('LT')
