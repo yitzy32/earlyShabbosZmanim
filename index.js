@@ -149,9 +149,10 @@ function findFirstDSTFriday() {
   firstDstDay = document.getElementById('first-dst-day')
   firstDstDay.innerHTML = `(first week of DST is ${firstFriOfDst})`
 }
-document.addEventListener("DOMContentLoaded", function () {
-  findFirstDSTFriday();
-});
+// Finds first Friday of DST
+// document.addEventListener("DOMContentLoaded", function () {
+//   findFirstDSTFriday();
+// });
 
 function weeksValidator() {
   let weeks = document.getElementById('how-many-weeks').value

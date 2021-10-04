@@ -98,14 +98,22 @@
     <section class="container" id="search-container">
       <section class="box special">
         <div class="row gtr-uniform gtr-50">
-          <div class="col-6 col-12-mobilep">
+          <div class="col-4 col-12-mobilep">
+            <h4>Early Mincha</h4>
+            <select name="" id="mins-before-plag">
+              <option value="12">12 minutes before Plag</option>
+              <option selected value="15">15 minutes before Plag</option>
+              <option value="20">20 minutes before Plag</option>
+            </select>
+          </div>
+          <div class="col-4 col-12-mobilep">
             <h4>Mincha B'zman</h4>
             <select name="" id="mincha-bizman-minutes">
               <option value="5">5 minutes after Candle Lighting</option>
               <option selected value="10">10 minutes after Candle Lighting</option>
             </select>
           </div>
-          <div class="col-6 col-12-mobilep">
+          <div class="col-4 col-12-mobilep">
             <h4>Tzeis</h4>
             <select name="" id="mins-after-shkia">
               <option value="40">40 minutes after Shkia</option>
@@ -113,21 +121,13 @@
               <option value="72">72 minutes after Shkia</option>
             </select>
           </div>
-          <div class="col-4 col-12-mobilep">
-            <h4>Please Enter Desired Starting Date (MM/DD/YYYY)<span id="first-dst-day"></span></h4>
-            <input type="text" id="users-date" maxlength="10" onkeyup="usersDate(event)">
-          </div>
-          <div class="col-4 col-12-mobilep">
-            <h4>How many weeks would you like to get? (Max 34)</h4>
+          <div class="col-6 col-12-mobilep">
+            <h4>How many weeks? (Max 34)</h4>
             <input type="text" id="how-many-weeks">
           </div>
-          <div class="col-4 col-12-mobilep">
-            <h4>How many minutes should mincha be before Plag?</h4>
-            <select name="" id="mins-before-plag">
-              <option>12</option>
-              <option selected>15</option>
-              <option>20</option>
-            </select>
+          <div class="col-6 col-12-mobilep">
+            <h4>Starting Date (MM/DD/YYYY)</h4>
+            <input type="text" id="users-date" maxlength="10" onkeyup="usersDate(event)">
           </div>
           <div class="col-12">
             <h3>Enter Zipcode Below</h3>
