@@ -3,6 +3,7 @@ async function generateCalendar() {
   if (!weeksValidator()) return
 
   let usersDate = moment(document.getElementById('users-date').value)
+  let howManyMinsAfterShkia = document.getElementById("mins-after-shkia").value;
   let howManyWeeks = document.getElementById("how-many-weeks").value;
   let minchaBizmanMinutes = document.getElementById("mincha-bizman-minutes").value;
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
@@ -39,7 +40,7 @@ async function generateCalendar() {
         temporaryDay["minchaBizman"] = moment(temporaryDay["candleLighting"], "HH:mm A").add(minchaBizmanMinutes, "minutes").format('LT')
         console.log(temporaryDay['minchaBizman'])
         temporaryDay["shkia"] = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        temporaryDay["tzeis40min"] = moment(response.data["times"]["sunset"]).add(40, "minutes").format('LT')
+        temporaryDay["tzeis"] = moment(response.data["times"]["sunset"]).add(parseInt(howManyMinsAfterShkia), "minutes").format('LT')
         console.log(temporaryDay)
         temporaryDays.push(temporaryDay)
       })
@@ -70,13 +71,15 @@ async function generateCalendar() {
   let tbodyHmtl = '';
 
   for (const day of temporaryDays) {
-    tbodyHmtl += `<tr>\n<td id="date-column">${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td class='candle-lighing'>${day.candleLighting}</td>\n<td>${day.minchaBizman}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis40min}</td>\n</tr>`
+    tbodyHmtl += `<tr>\n<td id="date-column">${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td class='candle-lighing'>${day.candleLighting}</td>\n<td>${day.minchaBizman}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis}</td>\n</tr>`
     location = day.location
   }
 
   locationH2.innerHTML = "Zmanim for: " + location;
 
-  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis 40 Minutes</th></tr>";
+  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis <span id='users-tzeis'></span> Minutes</th></tr>";
+
+  document.getElementById("users-tzeis").innerHTML = howManyMinsAfterShkia;
 
   tableBody.innerHTML = tbodyHmtl
 
