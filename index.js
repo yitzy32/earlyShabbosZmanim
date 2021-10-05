@@ -88,6 +88,9 @@ async function generateCalendar() {
   document.getElementById('table-placeholder').style.display = "none";
   document.getElementById('table-container').style.visibility = "visible";
 
+  document.getElementById('how-many-weeks').value = "";
+  document.getElementById('users-date').value = "";
+  document.getElementById('zipcode').value = "";
   document.getElementById('table-container').scrollIntoView();
 }
 
