@@ -1,3 +1,15 @@
+function findParsha(arrayOfInfo) {
+  arrayOfInfo.forEach(e => {
+    if (e.category === "parashat") {
+      console.log(e.hebrew)
+    }
+  });
+}
+
+axios.get("https://www.hebcal.com/shabbat?cfg=json&zip=11229&m=50&a=on&gy=2021&gm=3&gd=27").then(response => {
+  const info = response.data.items
+  findParsha(info)
+})
 async function generateCalendar() {
 
   if (!weeksValidator()) return
