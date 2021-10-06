@@ -1,15 +1,3 @@
-function findParsha(arrayOfInfo) {
-  arrayOfInfo.forEach(e => {
-    if (e.category === "parashat") {
-      console.log(e.hebrew)
-    }
-  });
-}
-
-axios.get("https://www.hebcal.com/shabbat?cfg=json&zip=11229&m=50&a=on&gy=2021&gm=3&gd=27").then(response => {
-  const info = response.data.items
-  findParsha(info)
-})
 async function generateCalendar() {
 
   if (!weeksValidator()) return
@@ -71,6 +59,11 @@ async function generateCalendar() {
     // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
     thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
     thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
+
+    axios.get(`https://www.hebcal.com/shabbat?cfg=json&zip=${zipcode}&m=50&a=on&gy=${year}&gm=${month}&gd=${day}`).then(response => {
+      const info = response.data.items
+      findParsha(info)
+    })
   }
   console.log(temporaryDays)
 
@@ -177,4 +170,13 @@ function weeksValidator() {
     alert("Max weeks is 34")
     return false
   }
+}
+
+function findParsha(arrayOfInfo) {
+  arrayOfInfo.forEach(e => {
+    // console.log(arrayOfInfo)
+    if (e.category === "parashat") {
+      console.log(e.hebrew)
+    }
+  });
 }
