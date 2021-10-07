@@ -17,10 +17,7 @@ async function generateCalendar() {
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
-    let arrayOfDay = thisFridaySlashes.split("/")
-    let month = arrayOfDay[0]
-    let day = arrayOfDay[1]
-    let year = arrayOfDay[2]
+    let [month, day, year] = thisFridaySlashes.split("/")
     thisFridayDashes += year
     thisFridayDashes += "-"
     thisFridayDashes += month
