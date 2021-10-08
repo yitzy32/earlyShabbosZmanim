@@ -31,7 +31,11 @@ async function generateCalendar() {
         temporaryDay["location"] = response.data.location.name
         temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("LL");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
+        if (dateIsDST(thisFridayDashes)) {
+          temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
+        } else {
+          temporaryDay["earlyMincha"] = "----"
+        }
         temporaryDay["plagHaMincha"] = moment(response.data["times"]["plagHaMincha"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         temporaryDay["candleLighting"] = moment(response.data["times"]["sunset"]).subtract(18, "minutes").format('LT')
         temporaryDay["minchaBizman"] = moment(temporaryDay["candleLighting"], "HH:mm A").add(minchaBizmanMinutes, "minutes").format('LT')
@@ -176,4 +180,12 @@ function findParsha(arrayOfInfo) {
       console.log(e.hebrew)
     }
   });
+}
+
+function dateIsDST(date) {
+  let [month, day, year] = date.split("/")
+  if (moment(`${year}-${month}-${day}`, "YYYY-MM-DD").isDST()) {
+    return true
+  }
+  false
 }
