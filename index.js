@@ -109,16 +109,8 @@ zipcode.addEventListener("keyup", function (event) {
   }
 });
 
-// Allows user to enter start date. js adds slashes
-// Validates day and month format
-function usersDate(event) {
+function addSlashes(event) {
   let dateInput = document.getElementById('users-date')
-  let dateInputVal = dateInput.value
-  let splitDateInputVal = dateInputVal.split("/")
-  let month = splitDateInputVal[0]
-  let day = splitDateInputVal[1]
-  let months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-  let days = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
   if (event.keyCode == 8 || event.keyCode == 46) {
     return
   } else if (dateInput.value.length === 2) {
@@ -127,11 +119,6 @@ function usersDate(event) {
   } else if (dateInput.value.length === 5) {
     let addSecondSlash = dateInput.value += "/"
     dateInput.toString().replace(dateInput.value, addSecondSlash);
-  } else if (dateInput.value.length === 10 && months.includes(month) && days.includes(day) && dateInputVal[2] === "/" && dateInputVal[5] === "/") {
-    // This doesn't actually allow or stop anything yet
-    return true
-  } else {
-    return false
   }
 }
 
