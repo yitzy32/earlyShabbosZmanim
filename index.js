@@ -9,29 +9,19 @@ async function generateCalendar() {
   let howManyMinsBeforePlag = document.getElementById('mins-before-plag').value;
   let zipcode = document.getElementById("zipcode").value;
 
-  let thisFridayDashes = "";
-  let thisFridaySlashes = usersDate.endOf('week').subtract(1, 'day').format("L");
-  console.log(thisFridaySlashes)
+  let friday = usersDate.endOf('week').subtract(1, 'day').format("YYYY-MM-DD");
 
   let temporaryDays = []
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
-    let [month, day, year] = thisFridaySlashes.split("/")
-    thisFridayDashes += year
-    thisFridayDashes += "-"
-    thisFridayDashes += month
-    thisFridayDashes += "-"
-    thisFridayDashes += day
-    console.log("thisFridayDashes:", thisFridayDashes)
-
-    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${thisFridayDashes}`)
+    await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${friday}`)
       .then(function (response) {
 
         temporaryDay["location"] = response.data.location.name
         temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("LL");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
-        if (dateIsDST(thisFridayDashes)) {
+        if (dateIsDST(friday)) {
           temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
         } else {
           temporaryDay["earlyMincha"] = "----"
@@ -55,11 +45,10 @@ async function generateCalendar() {
         console.log(error.response.status);
         window.location.reload();
       });
-    thisFridayDashes = ""
 
-    // This line gets rid of deprecation warning discussed: https://github.com/moment/moment/issues/1407
-    thisFridaySlashes = moment(`${year} ${month} ${day}`, "YYYY MM DD");
-    thisFridaySlashes = moment(thisFridaySlashes).add(7, "day").format("L")
+    friday = moment(friday).add(7, "day").format("YYYY-MM-DD");
+
+    let [year, month, day] = friday.split("-")
 
     axios.get(`https://www.hebcal.com/shabbat?cfg=json&zip=${zipcode}&m=50&a=on&gy=${year}&gm=${month}&gd=${day}`).then(response => {
       const info = response.data.items
