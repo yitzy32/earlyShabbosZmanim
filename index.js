@@ -11,7 +11,6 @@ async function generateCalendar() {
 
   let friday = usersDate.endOf('week').subtract(1, 'day').format("YYYY-MM-DD");
 
-  let temporaryDays = []
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
     let temporaryDay = {}
 
@@ -32,8 +31,6 @@ async function generateCalendar() {
         console.log(temporaryDay['minchaBizman'])
         temporaryDay["shkia"] = moment(response.data["times"]["sunset"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         temporaryDay["tzeis"] = moment(response.data["times"]["sunset"]).add(parseInt(howManyMinsAfterShkia), "minutes").format('LT')
-        console.log(temporaryDay)
-        temporaryDays.push(temporaryDay)
       })
       .catch(function (error) {
         if (error.response.data.error === `Sorry, can't find ZIP code: ${zipcode}`) {
@@ -54,31 +51,17 @@ async function generateCalendar() {
       const info = response.data.items
       findParsha(info)
     })
+
+    document.getElementById('locationH2').innerHTML = `Zmanim For: ${temporaryDay["location"]}`
+
+    document.getElementById('tableHead').innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis <span id='users-tzeis'></span> Minutes</th></tr>";
+
+    document.getElementById("users-tzeis").innerHTML = howManyMinsAfterShkia;
+
+    document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column">${temporaryDay["date"]}</td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
+
+    document.getElementById('disclaimer').innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
   }
-  console.log(temporaryDays)
-
-  const locationH2 = document.getElementById('locationH2')
-  const tableHeadData = document.getElementById('tableHead');
-  const tableBody = document.getElementById('tableData')
-  const disclaimer = document.getElementById('disclaimer')
-
-  let location = '';
-  let tbodyHmtl = '';
-
-  for (const day of temporaryDays) {
-    tbodyHmtl += `<tr>\n<td id="date-column">${day.date}</td>\n<td>${day.minchaGedola}</td>\n<td>${day.earlyMincha}</td>\n<td>${day.plagHaMincha}</td>\n<td class='candle-lighing'>${day.candleLighting}</td>\n<td>${day.minchaBizman}</td>\n<td>${day.shkia}</td>\n<td>${day.tzeis}</td>\n</tr>`
-    location = day.location
-  }
-
-  locationH2.innerHTML = "Zmanim for: " + location;
-
-  tableHeadData.innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis <span id='users-tzeis'></span> Minutes</th></tr>";
-
-  document.getElementById("users-tzeis").innerHTML = howManyMinsAfterShkia;
-
-  tableBody.innerHTML = tbodyHmtl
-
-  disclaimer.innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
 
   document.getElementById('table-placeholder').style.display = "none";
   document.getElementById('table-container').style.visibility = "visible";
