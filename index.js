@@ -11,7 +11,11 @@ async function generateCalendar() {
 
   let friday = usersDate.endOf('week').subtract(1, 'day').format("YYYY-MM-DD");
 
+  let loopsCounter = 0;
+
   for (let index = 0; index < parseInt(howManyWeeks); index++) {
+    loopsCounter += 1
+
     let temporaryDay = {}
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${friday}`)
@@ -52,15 +56,18 @@ async function generateCalendar() {
       findParsha(info)
     })
 
-    document.getElementById('locationH2').innerHTML = `Zmanim For: ${temporaryDay["location"]}`
+    if (loopIsOnLastItteration(loopsCounter)) {
 
-    document.getElementById('tableHead').innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis <span id='users-tzeis'></span> Minutes</th></tr>";
+      document.getElementById('locationH2').innerHTML = `Zmanim For: ${temporaryDay["location"]}`
 
-    document.getElementById("users-tzeis").innerHTML = howManyMinsAfterShkia;
+      document.getElementById('tableHead').innerHTML = "<tr><th>Date</th><th>Mincha Gedola</th><th>Early Mincha</th><th>Plag</th><th class='candle-lighing'>Candle Lighting</th><th>Mincha B'zman</th><th>Shkia</th><th>Tzeis <span id='users-tzeis'></span> Minutes</th></tr>";
+
+      document.getElementById("users-tzeis").innerHTML = howManyMinsAfterShkia;
+
+      document.getElementById('disclaimer').innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
+    }
 
     document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column">${temporaryDay["date"]}</td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
-
-    document.getElementById('disclaimer').innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
   }
 
   document.getElementById('table-placeholder').style.display = "none";
@@ -144,6 +151,13 @@ function findParsha(arrayOfInfo) {
 function dateIsDST(date) {
   let [month, day, year] = date.split("/")
   if (moment(`${year}-${month}-${day}`, "YYYY-MM-DD").isDST()) {
+    return true
+  }
+  false
+}
+
+function loopIsOnLastItteration(numOfItterations) {
+  if (numOfItterations == document.getElementById('how-many-weeks').value) {
     return true
   }
   false
