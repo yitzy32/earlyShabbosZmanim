@@ -47,14 +47,24 @@ async function generateCalendar() {
         window.location.reload();
       });
 
-    friday = moment(friday).add(7, "day").format("YYYY-MM-DD");
-
     let [year, month, day] = friday.split("-")
 
-    axios.get(`https://www.hebcal.com/shabbat?cfg=json&zip=${zipcode}&m=50&a=on&gy=${year}&gm=${month}&gd=${day}`).then(response => {
+    await axios.get(`https://www.hebcal.com/shabbat?cfg=json&zip=${zipcode}&m=50&a=on&gy=${year}&gm=${month}&gd=${day}`).then(response => {
       const info = response.data.items
-      findParsha(info)
+      info.forEach(e => {
+        // findParsha(e, )
+        // console.log(arrayOfInfo)
+        if (e.category === "parashat") {
+          temporaryDay["parsha"] = e.hebrew
+        } else if (e.category === "holiday" && e.subcat === "major" && yomTovFallsOutOnShabbos(friday, e.date)) {
+          temporaryDay["parsha"] = e.hebrew
+        }
+      });
     })
+
+    console.log(temporaryDay)
+    console.log("==============================")
+    friday = moment(friday).add(7, "day").format("YYYY-MM-DD");
 
     if (loopIsOnLastItteration(loopsCounter)) {
 
@@ -67,7 +77,7 @@ async function generateCalendar() {
       document.getElementById('disclaimer').innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
     }
 
-    document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column">${temporaryDay["date"]}</td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
+    document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column">${temporaryDay["date"]}${temporaryDay["parsha"]}</td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
   }
 
   document.getElementById('table-placeholder').style.display = "none";
@@ -139,14 +149,6 @@ function weeksValidator() {
   }
 }
 
-function findParsha(arrayOfInfo) {
-  arrayOfInfo.forEach(e => {
-    // console.log(arrayOfInfo)
-    if (e.category === "parashat") {
-      console.log(e.hebrew)
-    }
-  });
-}
 
 function dateIsDST(date) {
   let [month, day, year] = date.split("/")
@@ -158,6 +160,14 @@ function dateIsDST(date) {
 
 function loopIsOnLastItteration(numOfItterations) {
   if (numOfItterations == document.getElementById('how-many-weeks').value) {
+    return true
+  }
+  false
+}
+
+function yomTovFallsOutOnShabbos(dayOne, dayTwo) {
+  shabbos = moment(dayOne).add(1, 'day').format("YYYY-MM-DD")
+  if (shabbos === dayTwo) {
     return true
   }
   false
