@@ -22,7 +22,7 @@ async function generateCalendar() {
       .then(function (response) {
 
         temporaryDay["location"] = response.data.location.name
-        temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("LL");
+        temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("ll");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         if (dateIsDST(friday)) {
           temporaryDay["earlyMincha"] = moment(response.data["times"]["plagHaMincha"]).subtract(parseInt(howManyMinsBeforePlag), "minutes").format('LT')
@@ -73,7 +73,7 @@ async function generateCalendar() {
       document.getElementById('disclaimer').innerHTML = "These times are rounded to the nearest minute. Do not rely on any zman until the last moment.<br /> Double check the accuracy of your new zmanim calendar by visiting <a href=https://www.myzmanim.com/day.aspx?askdefault=1&vars=US" + zipcode + " target='_blank'>MyZmanim</a>"
     }
 
-    document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column">${temporaryDay["date"]}${temporaryDay["parsha"]}</td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
+    document.getElementById('tableData').innerHTML += `<tr>\n<td id="date-column"><span id="english-date">${temporaryDay["date"]}</span> <span id="parsha">${temporaryDay["parsha"]}</span></td>\n<td>${temporaryDay["minchaGedola"]}</td>\n<td>${temporaryDay["earlyMincha"]}</td>\n<td>${temporaryDay["plagHaMincha"]}</td>\n<td class='candle-lighing'>${temporaryDay["candleLighting"]}</td>\n<td>${temporaryDay["minchaBizman"]}</td>\n<td>${temporaryDay["shkia"]}</td>\n<td>${temporaryDay["tzeis"]}</td>\n</tr>`
   }
 
   document.getElementById('table-placeholder').style.display = "none";

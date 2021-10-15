@@ -17,6 +17,7 @@ table {
   /* width: 8.25in; */
   margin-left: auto;
 	margin-right: auto;
+  font-size: .90em;
 }
 
 /* td,
@@ -96,4 +97,8 @@ section section div h2 {
 
 .candle-lighing {
   background-color: #feffae;
+}
+
+#english-date {
+  font-size: .60em;
 }
