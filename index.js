@@ -52,18 +52,14 @@ async function generateCalendar() {
     await axios.get(`https://www.hebcal.com/shabbat?cfg=json&zip=${zipcode}&m=50&a=on&gy=${year}&gm=${month}&gd=${day}`).then(response => {
       const info = response.data.items
       info.forEach(e => {
-        // findParsha(e, )
-        // console.log(arrayOfInfo)
-        if (e.category === "parashat") {
+        if (yomTovDoesntFallOutOnShabbos(e.category)) {
           temporaryDay["parsha"] = e.hebrew
-        } else if (e.category === "holiday" && e.subcat === "major" && yomTovFallsOutOnShabbos(friday, e.date)) {
+        } else if (yomTovFallsOutOnShabbos(friday, e.date, e.category, e.subcat)) {
           temporaryDay["parsha"] = e.hebrew
         }
       });
     })
 
-    console.log(temporaryDay)
-    console.log("==============================")
     friday = moment(friday).add(7, "day").format("YYYY-MM-DD");
 
     if (loopIsOnLastItteration(loopsCounter)) {
@@ -165,9 +161,16 @@ function loopIsOnLastItteration(numOfItterations) {
   false
 }
 
-function yomTovFallsOutOnShabbos(dayOne, dayTwo) {
+function yomTovFallsOutOnShabbos(dayOne, dayTwo, category, subcategory) {
   shabbos = moment(dayOne).add(1, 'day').format("YYYY-MM-DD")
-  if (shabbos === dayTwo) {
+  if (shabbos === dayTwo && category === "holiday" && subcategory === "major") {
+    return true
+  }
+  false
+}
+
+function yomTovDoesntFallOutOnShabbos(category) {
+  if (category === "parashat") {
     return true
   }
   false
