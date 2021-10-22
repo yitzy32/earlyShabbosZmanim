@@ -56,6 +56,7 @@ async function generateCalendar() {
           temporaryDay["parsha"] = e.hebrew
         } else if (yomTovFallsOutOnShabbos(friday, e.date, e.category, e.subcat)) {
           temporaryDay["parsha"] = e.hebrew
+          temporaryDay["earlyMincha"] = "----"
         }
       });
     })
