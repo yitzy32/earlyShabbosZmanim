@@ -117,6 +117,7 @@ function addSlashes(event) {
     let addSecondSlash = dateInput.value += "/"
     dateInput.toString().replace(dateInput.value, addSecondSlash);
   }
+  dateValidator()
 }
 
 // Function to find first Friday of DST
@@ -146,6 +147,23 @@ function weeksValidator() {
   }
 }
 
+function dateValidator() {
+  if (dateIsFullyTypedOut() && dateHasValidFormat()) {
+    console.log("valid")
+  } else if (dateIsFullyTypedOut() && !dateHasValidFormat()){
+    console.log("invalid")
+  }
+}
+
+function dateHasValidFormat() {
+  const date = document.getElementById("users-date").value
+  if (moment(date, 'MM/DD/YYYY', true).isValid()) return true
+}
+
+function dateIsFullyTypedOut() {
+  const date = document.getElementById("users-date").value
+  if (date.length == 10) return true
+}
 
 function dateIsDST(date) {
   let [month, day, year] = date.split("/")
