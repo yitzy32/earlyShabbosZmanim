@@ -150,6 +150,7 @@ function weeksValidator() {
 function dateValidator() {
   if (dateIsFullyTypedOut() && dateHasValidFormat()) {
     console.log("valid")
+    document.getElementById("checkmark").style.visibility = "visible";
   } else if (dateIsFullyTypedOut() && !dateHasValidFormat()){
     console.log("invalid")
   }
