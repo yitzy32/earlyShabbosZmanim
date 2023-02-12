@@ -20,7 +20,6 @@ async function generateCalendar() {
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${friday}`)
       .then(function (response) {
-
         temporaryDay["location"] = response.data.location.name
         temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("ll");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
@@ -58,6 +57,12 @@ async function generateCalendar() {
           temporaryDay["parsha"] = e.hebrew
           temporaryDay["earlyMincha"] = "----"
         }
+        const result = info.filter(item => item.title_orig === "Candle lighting");
+        if(result.length === 1){
+          var sliceDate = result[0].title.slice(17, 21)
+          temporaryDay["candleLighting"] = sliceDate + " PM";
+        }
+        
       });
     })
 
@@ -109,6 +114,7 @@ zipcode.addEventListener("keyup", function (event) {
 function addSlashes(event) {
   let dateInput = document.getElementById('users-date')
   if (event.keyCode == 8 || event.keyCode == 46) {
+    dateValidator()
     return
   } else if (dateInput.value.length === 2) {
     let addFirstSlash = dateInput.value += "/"
@@ -149,16 +155,43 @@ function weeksValidator() {
 
 function dateValidator() {
   if (dateIsFullyTypedOut() && dateHasValidFormat()) {
-    console.log("valid")
-    document.getElementById("checkmark").style.visibility = "visible";
+    document.getElementById("validDate").style.visibility = "visible";
+    document.getElementById("invalidDate").style.visibility = "hidden";
   } else if (dateIsFullyTypedOut() && !dateHasValidFormat()){
-    console.log("invalid")
+    document.getElementById("invalidDate").style.visibility = "visible";
+    document.getElementById("validDate").style.visibility = "hidden";
+  } else if (!dateIsFullyTypedOut()) {
+    document.getElementById("validDate").style.visibility = "hidden";
+    document.getElementById("invalidDate").style.visibility = "hidden";
   }
 }
 
 function dateHasValidFormat() {
   const date = document.getElementById("users-date").value
-  if (moment(date, 'MM/DD/YYYY', true).isValid()) return true
+  // credit https://stackoverflow.com/a/6178341
+
+    // First check for the pattern
+    if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date))
+        return false;
+
+    // Parse the date parts to integers
+    var parts = date.split("/");
+    var day = parseInt(parts[1], 10);
+    var month = parseInt(parts[0], 10);
+    var year = parseInt(parts[2], 10);
+
+    // Check the ranges of month and year
+    if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        return false;
+
+    var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+    // Adjust for leap years
+    if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+    // Check the range of the day
+    return day > 0 && day <= monthLength[month - 1];
 }
 
 function dateIsFullyTypedOut() {

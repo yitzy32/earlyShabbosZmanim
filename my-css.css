@@ -107,7 +107,12 @@ section section div h2 {
   font-family: 'David Libre', serif;
 }
 
-#checkmark {
+#validDate {
   color: #198754;
+  visibility: hidden;
+}
+
+#invalidDate {
+  color: #c70808;
   visibility: hidden;
 }
