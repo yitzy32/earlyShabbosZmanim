@@ -20,7 +20,7 @@ async function generateCalendar() {
 
     await axios.get(`https://www.hebcal.com/zmanim?cfg=json&zip=${zipcode}&date=${friday}`)
       .then(function (response) {
-        temporaryDay["location"] = response.data.location.name
+        temporaryDay["location"] = response.data.location.title
         temporaryDay["date"] = moment(response.data["date"], "YYYY MM DD").format("ll");
         temporaryDay["minchaGedola"] = moment(response.data["times"]["minchaGedola"], "YYYY-MM-DDTHH:mm:ss").format("h:mm A")
         if (dateIsDST(friday)) {
